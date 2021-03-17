@@ -11,6 +11,3 @@ results = Sp.current_user_playlists()
 print(results)
 for thing in results.get("items"):
     print(f"playlist: {thing.get('name')} with tracks: {thing.get('tracks')}")
-#for idx, item in enumerate(results['items']):
-#    track = item['track']
-#    print(idx, track['artists'][0]['name'], " – ", track['name'])
