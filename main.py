@@ -1,13 +1,20 @@
 import spotipy as sp
 
 from spotipy.oauth2 import SpotifyOAuth
-
-Sp = sp.Spotify(auth_manager=SpotifyOAuth(client_id="de445576e2884c55be39229d878d7ca1",
+OAuth = SpotifyOAuth(client_id="de445576e2884c55be39229d878d7ca1",
                                                client_secret="66e060d86a3e4f78bdd4e8a65886d3fe",
                                                redirect_uri="http://basicbitch",#"http://localhost:9000",
-                                               scope="user-library-read"))
+                                               scope="user-library-read")
+Sp = sp.Spotify(auth_manager=OAuth)
+token = OAuth.get_cached_token()
 
-results = Sp.current_user_playlists()
-print(results)
-for thing in results.get("items"):
-    print(f"playlist: {thing.get('name')} with tracks: {thing.get('tracks')}")
+playlists = Sp.current_user_playlists()
+print(playlists)
+
+for playlist in playlists.get("items"):
+    albumTrackList = Sp.playlist(playlist.get('id')).get('tracks').get('items')
+    print(f"album: {Sp.playlist(playlist.get('id')).get('name')}")
+    for track in albumTrackList:
+        if track.get('track') != None:
+            print(track.get('track').get('name'))
+
