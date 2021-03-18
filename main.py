@@ -2,9 +2,9 @@ import spotipy as sp
 
 from spotipy.oauth2 import SpotifyOAuth
 
-Sp = sp.Spotify(auth_manager=SpotifyOAuth(client_id="de445576e2884c55be39229d878d7ca1",
-                                               client_secret="66e060d86a3e4f78bdd4e8a65886d3fe",
-                                               redirect_uri="http://basicbitch",#"http://localhost:9000",
+Sp = sp.Spotify(auth_manager=SpotifyOAuth(client_id="5d6ba60172a84bf2966d5a073b3c02d1",
+                                               client_secret="c898a8f530f5478bb5420ec418326421",
+                                               redirect_uri="https://spotifycharts.com/regional/global/weekly/latest",#"http://localhost:9000",
                                                scope="user-library-read"))
 
 results = Sp.current_user_playlists()
