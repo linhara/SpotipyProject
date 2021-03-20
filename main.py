@@ -30,7 +30,7 @@ userProfile   = Sp.user(userName)
 usersPopularity = 0
 songCount = 0
 for playlist in userPlaylists:
-    if (playlist.get('owner').get('display_name') == userName):
+    if (playlist.get('owner').get('id') == userName):
         go = True
         j = 0
         currId = playlist.get('id')
