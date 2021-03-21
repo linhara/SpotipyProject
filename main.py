@@ -15,7 +15,6 @@ def main():
         print('You are a basic bitch...')
     else:
         print('Congratulations! You are not a basic bitch!')
-
 def averagePop (Sp, playlist_url):
     # ----------------------------------------------------------------------------
     # Comparing with a list of more than 500 songs, therefore we go from range 0-6
