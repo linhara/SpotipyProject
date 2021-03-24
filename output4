@@ -1,0 +1,14 @@
+for i in range(6):
+        popularity_list += [song["track"]["popularity"] for song in Sp.playlist_items(most_played_songs, offset=100 * i).get("items")]
+
+
+Utan LC
+
+    popularity_list = []
+    list_of_songs = []
+
+    for i in range(6):
+        list_of_songs += Sp.playlist_items(most_played_songs, offset=100 * i).get("items")
+
+    for song in list_of_songs:
+        popularity_list += [song["track"]["popularity"]]
