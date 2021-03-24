@@ -9,7 +9,7 @@ def main():
     
     averagePop = getListAvgPop(most_played_songs, Sp)
     userPop = getUserPop(username, Sp)
-    print(f'Average popularity score: {averagePop}')
+    print(f'Average popularity score: {averagePop / 2}')
     print(f'Your popularity score: {userPop}')
 
     if (averagePop / 2) < userPop:
@@ -40,8 +40,9 @@ def getListAvgPop(id, Sp):  # Creds om ni löser denna med modulo 100 istället.
 
 def getUserPop(user_name, Sp):
     userPlaylists = Sp.current_user_playlists().get("items")
+    total_popularity = 0
     for playlist in userPlaylists:
-        total_popularity += playlist.get("owner").get("id") == user_name ? getListAvgPop(playlist.get("id"), Sp) : 0
+        total_popularity += getListAvgPop(playlist.get("id"), Sp) if (playlist.get("owner").get("id") == user_name) else 0
 
     return total_popularity/len(userPlaylists)
 
