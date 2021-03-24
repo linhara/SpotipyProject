@@ -2,13 +2,15 @@ import spotipy as sp
 
 
 def main():
-    #username = input("Please enter username: ")
-    username = "optige"
+    most_played_songs = "https://open.spotify.com/playlist/2YRe7HRKNRvXdJBp9nXFza?code=AQAQZcBQj5p_5ry1PxdeO6oLjBzIkd67MVLfhQul_0HMliIW5k3sx9OEtGWAuswEa94EjUpgZdQEhTYQttclGfHZN6boYLI4zDwu4CERkVpfY0W1FopucXdkhKnV0oPD_-kuv4yKrHI9VkhTSH_XuN5NPiBD8roa9pp_Eclw1I1mE_td9OH_urKanteQtvI8P6d_ZSiueUnRgJ17oZsjqNlLAVHlFxhb1CGlv57fKg"
 
+    username = input("Please enter username: ")
     Sp = authenticate(username)
-
-    averagePop = getAveragePop(Sp)
-    userPop = getUserPop(Sp, username)
+    
+    averagePop = getListAvgPop(most_played_songs, Sp)
+    userPop = getUserPop(username, Sp)
+    print(f'Average popularity score: {averagePop}')
+    print(f'Your popularity score: {userPop}')
 
     if (averagePop / 2) < userPop:
         print("You are a basic bitch...")
@@ -17,7 +19,6 @@ def main():
 
 
 def authenticate(username):
-
     OAuth = sp.oauth2.SpotifyPKCE(
         client_id="de445576e2884c55be39229d878d7ca1",
         username=username,
@@ -26,47 +27,23 @@ def authenticate(username):
     )
     return sp.Spotify(auth_manager=OAuth)
 
-
-def getAveragePop(Sp):
-
-    most_played_songs = "https://open.spotify.com/playlist/2YRe7HRKNRvXdJBp9nXFza?code=AQAQZcBQj5p_5ry1PxdeO6oLjBzIkd67MVLfhQul_0HMliIW5k3sx9OEtGWAuswEa94EjUpgZdQEhTYQttclGfHZN6boYLI4zDwu4CERkVpfY0W1FopucXdkhKnV0oPD_-kuv4yKrHI9VkhTSH_XuN5NPiBD8roa9pp_Eclw1I1mE_td9OH_urKanteQtvI8P6d_ZSiueUnRgJ17oZsjqNlLAVHlFxhb1CGlv57fKg"
-
+def getListAvgPop(id, Sp):  # Creds om ni löser denna med modulo 100 istället.
     popularity_list = []
-    for i in range(6):
-        popularity_list += [song["track"]["popularity"] for song in Sp.playlist_items(most_played_songs, offset=100 * i).get("items")]
+    j = 0
+    while True:
+        new_songs = [song["track"]["popularity"] for song in Sp.playlist_items(id, offset=100 * j).get("items")]
+        if (len(new_songs) == 0): break
+        popularity_list += new_songs
+        j += 1
 
     return sum(popularity_list)/len(popularity_list)
 
-
-def getUserPop(Sp, user_name):
+def getUserPop(user_name, Sp):
     userPlaylists = Sp.current_user_playlists().get("items")
-
-    usersPopularity = 0
-    songCount = 0
     for playlist in userPlaylists:
-        if playlist.get("owner").get("id") == user_name:
-            go = True
-            j = 0
-            currId = playlist.get("id")
-            while go:
-                songList = Sp.playlist_items(currId, offset=j * 100).get("items")
-                for song in songList:
-                    if song.get("track"):
-                        songCount += 1
-                        usersPopularity += song.get("track").get("popularity")
-                if len(songList) < 100:
-                    go = False
-                else:
-                    j += 1
-    userAveragePop = usersPopularity / songCount
-    print(f"Your popularity score is: {userAveragePop}")
-    return userAveragePop
+        total_popularity += playlist.get("owner").get("id") == user_name ? getListAvgPop(playlist.get("id"), Sp) : 0
 
+    return total_popularity/len(userPlaylists)
 
 if __name__ == "__main__":
     main()
-
-
-# Ta bort oanvända importer
-# Två blankrader efter importer
-# Formattering över lag
