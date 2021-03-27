@@ -44,7 +44,7 @@ def getUserPop(user_name, Sp):
     for playlist in userPlaylists:
         total_popularity += getListAvgPop(playlist.get("id"), Sp) if (playlist.get("owner").get("id") == user_name) else 0
 
-    return total_popularity/len(userPlaylists)
+    return total_popularity/len(userPlaylists)      #TODO detta funkar inte eftersom spellistorna inte är lika långa, fråga för bättre förklaring
 
 if __name__ == "__main__":
     main()
