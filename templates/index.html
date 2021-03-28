@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Basic Bitch</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stil.css') }}">
 </head>
 <div class ="body">
 <body>
@@ -11,14 +11,14 @@
         <h1>Have you ever wondered if you are a basic bitch?</h1>
     </div>
     <div class="about">
-       <a href="about.html" target="_blank">About the website</a>
+       <a href="../static/about.html" target="_blank">About the website</a>
     </div>
     <div class="main">
         <div class ="text">
 <strong>Please enter your spotify</strong> <em>username</em> <strong> below:</strong>                 
 </div>
-    <form action="/action_page.py">
-      <input type="text" placeholder="Username..." name="search">
+    <form action="/app.py">
+      <input type="text" placeholder="Username..." name="username">
       <button type="submit">Submit</button>
     </form>
     </div>
