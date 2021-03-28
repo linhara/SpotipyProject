@@ -10,7 +10,6 @@ def homePage():
 def main():
     playlist_url ="https://open.spotify.com/playlist/2YRe7HRKNRvXdJBp9nXFza?code=AQAQZcBQj5p_5ry1PxdeO6oLjBzIkd67MVLfhQul_0HMliIW5k3sx9OEtGWAuswEa94EjUpgZdQEhTYQttclGfHZN6boYLI4zDwu4CERkVpfY0W1FopucXdkhKnV0oPD_-kuv4yKrHI9VkhTSH_XuN5NPiBD8roa9pp_Eclw1I1mE_td9OH_urKanteQtvI8P6d_ZSiueUnRgJ17oZsjqNlLAVHlFxhb1CGlv57fKg"
 
-
     userName = request.args.get('username')
     Sp = authenticate(userName)
 
@@ -40,8 +39,8 @@ def getUserPop(Sp, userName):
     total_popularity = 0
     total_length = 0
     for playlist in userPlaylists:
-        popSum, playlistLen =getListAvgPop(Sp, playlist.get("id")) if (
-                playlist.get("owner").get("id") == userName) else 0
+        popSum, playlistLen = getListAvgPop(Sp, playlist.get("id")) if (
+                playlist.get("owner").get("id") == userName) else (0, 0)
 
         total_popularity += popSum
         total_length += playlistLen
