@@ -1,5 +1,4 @@
 import spotipy as sp
-#import flask
 from flask import Flask,request,render_template
 app = Flask(__name__)
 
@@ -36,23 +35,18 @@ def getListAvgPop(Sp, id):
     return sum(popularity_list), len(popularity_list)
 
 
-def getUserPop(Sp,user_name):
+def getUserPop(Sp, userName):
     userPlaylists = Sp.current_user_playlists().get("items")
     total_popularity = 0
     total_length = 0
     for playlist in userPlaylists:
-        #print(getListAvgPop(Sp, playlist.get("id")) if (
-                    #playlist.get("owner").get("id") == user_name) else 0)
         popSum, playlistLen =getListAvgPop(Sp, playlist.get("id")) if (
-                    playlist.get("owner").get("id") == user_name) else 0
+                playlist.get("owner").get("id") == userName) else 0
 
         total_popularity += popSum
         total_length += playlistLen
 
-
-    #return total_popularity / len(userPlaylists)
     return total_popularity / total_length
-
 
 
 def authenticate(userName):
@@ -65,6 +59,6 @@ def authenticate(userName):
 
 if __name__ == '__main__':
     #app.run(host = '0.0.0.0',debug=False)
-    app.run(host = '0.0.0.0', debug=False)
+    app.run(debug=False)
 
 
