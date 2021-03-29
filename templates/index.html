@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Basic Bitch</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stil.css') }}">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script>
+        function loadHomePage(){
+        $.ajax({
+            url:"/app.py",
+            type:"POST",
+            dataType:"json",
+            contentType: 'application/json, charset=utf-8',
+            success: function (data){
+            $(success).replaceWith(data)
+            }
+        });
+        }
+    </script>
 </head>
+<div id="success">
+    {{x}}
+</div>
 <div class ="body">
 <body>
     <div class="title">

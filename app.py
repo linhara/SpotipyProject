@@ -1,26 +1,27 @@
 import spotipy as sp
 from flask import Flask,request,render_template
 app = Flask(__name__)
-
-@app.route("/")
-def homePage():
-    return render_template('index.html')
-
-@app.route("/app.py")
+result = ""
+@app.route("/app.py", methods=['GET','POST'])
 def main():
     playlist_url ="https://open.spotify.com/playlist/2YRe7HRKNRvXdJBp9nXFza?code=AQAQZcBQj5p_5ry1PxdeO6oLjBzIkd67MVLfhQul_0HMliIW5k3sx9OEtGWAuswEa94EjUpgZdQEhTYQttclGfHZN6boYLI4zDwu4CERkVpfY0W1FopucXdkhKnV0oPD_-kuv4yKrHI9VkhTSH_XuN5NPiBD8roa9pp_Eclw1I1mE_td9OH_urKanteQtvI8P6d_ZSiueUnRgJ17oZsjqNlLAVHlFxhb1CGlv57fKg"
 
     userName = request.args.get('username')
     Sp = authenticate(userName)
-
+    print(userName)
     totalPopSum, nrOfSongs = getListAvgPop(Sp,playlist_url)
     avgPop = totalPopSum/nrOfSongs
     userAvgPop = getUserPop(Sp, userName)
     if (avgPop / 2 < userAvgPop):
-        return(f"The average popularity is: {avgPop/2}, Your popularity score is: {userAvgPop}.You are a basic bitch")
+        result = (f"The average popularity is: {avgPop/2}, Your popularity score is: {userAvgPop}. You are a basic bitch")
+        return render_template('bitch.html', x=result)
     else:
-        return(f"The average popularity is: {avgPop/2}, Your popularity score is: {userAvgPop}.Congrtulations! You are not a basic bitch!")
+        result = (f"The average popularity is: {avgPop/2}, Your popularity score is: {userAvgPop}. Congrtulations! You are not a basic bitch!")
+        return render_template('notbasicBitch.html', x=result)
 
+@app.route("/", methods=['GET' ,'POST'])
+def homePage():
+    return render_template('index.html', x=result)
 
 def getListAvgPop(Sp, id):
     popularity_list = []
@@ -41,6 +42,7 @@ def getUserPop(Sp, userName):
     for playlist in userPlaylists:
         popSum, playlistLen = getListAvgPop(Sp, playlist.get("id")) if (
                 playlist.get("owner").get("id") == userName) else (0, 0)
+        print(playlist.get("owner").get("id"))
 
         total_popularity += popSum
         total_length += playlistLen
@@ -57,7 +59,6 @@ def authenticate(userName):
         return sp.Spotify(auth_manager=OAuth)
 
 if __name__ == '__main__':
-    #app.run(host = '0.0.0.0',debug=False)
     app.run(debug=False)
 
 

@@ -1,0 +1,181 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.body {
+    background-image: url('https://1.bp.blogspot.com/-qjjHcpjDyMc/Xtfe8SQa7DI/AAAAAAAADE4/cWT23-ZDl-YWFjbvFQmVVAa7PHjXozfIACK4BGAsYHg/Spotify.gif');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    
+}
+.aboutBody{
+    background-image: url('https://direct.rhapsody.com/imageserver/images/alb.426121511/500x500.jpg');
+    height: 100vh;
+    background-size: auto;
+    background-position: center;
+}
+.aboutText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: black;
+}
+
+.main{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: brown;
+}
+
+input{
+    width: 300px;
+    height: 20px;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    
+}
+button{
+    width: 50px;
+    height: 20px;
+    border-radius: 8px;
+    border: 2px solid grey;
+    cursor: pointer;
+    
+}
+form::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+button:hover{
+    background-color: rgb(169,169,169);
+    color: white;
+    transition: 0.3s ease;
+    width: 70px;
+}
+.title{
+    text-align: center;
+    font-size: 25px;
+    color: brown;
+}
+.about{
+    text-align: center;
+    font-size: 20px;
+}
+
+body {
+    margin: 0;
+  }
+  
+#balloon-container {
+    height: 100vh;
+    padding: 1em;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+  
+.balloon {
+    height: 125px;
+    width: 105px;
+    border-radius: 75% 75% 70% 70%;
+    position: relative;
+  }
+  
+.balloon:before {
+    content: "";
+    height: 75px;
+    width: 1px;
+    padding: 1px;
+    background-color: #FDFD96;
+    display: block;
+    position: absolute;
+    top: 125px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  
+.balloon:after {
+      content: "▲";
+      text-align: center;
+      display: block;
+      position: absolute;
+      color: inherit;
+      top: 120px;
+      left: 0;
+      right: 0;
+      margin: auto;
+  }
+  
+@keyframes float {
+    from {transform: translateY(100vh);
+    opacity: 1;}
+    to {transform: translateY(-300vh);
+    opacity: 0;}
+  }
+
+.resultBody{
+    color: #fff;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    animation: blinkingBackground 2s infinite;
+}
+@keyframes blinkingBackground{
+    0%		{ background-color: #10c018;}
+    25%		{ background-color: #1056c0;}
+    50%		{ background-color: #ef0a1a;}
+    75%		{ background-color: #c72dcc;}
+    100%	{ background-color: #04a1d5;}
+}
+#success{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: black;
+}
+
+section { 
+    width: 100%; 
+    height: 100vh;
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    background-image: url(https://media.geeksforgeeks.org/wp-content/uploads/20200828184719/rain-300x300.png); 
+    animation: rain 0.4s linear infinite; 
+    opacity: 0; 
+}
+
+@keyframes rain { 
+    0% { 
+        background-position: 0 0; 
+        opacity: 1; 
+    } 
+
+    100% { 
+        background-position: 10% 100%; 
+        opacity: 1; 
+    } 
+}
+#success{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: white;
+}
